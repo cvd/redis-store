@@ -46,9 +46,9 @@ module Rack
           session_id = generate_sid
           @pool.set session_id, 0
         end
-        old_session = new_session.instance_variable_get('@old') || {}
-        session = merge_sessions session_id, old_session, new_session, session
-        @pool.set session_id, session, options
+        # old_session = new_session.instance_variable_get('@old') || {}
+        # session = merge_sessions session_id, old_session, new_session, session
+        @pool.set session_id, new_session, options
         return session_id
       rescue Errno::ECONNREFUSED
         warn "#{self} is unable to find server."
